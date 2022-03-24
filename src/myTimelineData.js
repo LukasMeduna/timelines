@@ -28,14 +28,24 @@ export const myTimeline = {
         },
         {
             id:2,
+            startingTimeUnit:"16.",
+            startingPosition: 1/3,
+            endingTimeUnit:"17.",
+            endingPosition: 3/4,
+            row: 0,
+            text: "manýrismus",
+            bgColor: "#e4d1d1"
+        },
+        {
+            id:3,
             startingTimeUnit:"17.",
             startingPosition: 0,
             endingTimeUnit:"18.",
             endingPosition: 1,
-            row: 0,
+            row: 1,
             text: "baroko",
             bgColor: "#e0e2e4"
         }]
 }
 
-export const timeUnitWidth = 150;
+export const timeUnitWidth = 30;
