@@ -1,23 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import Topbar from './components/topbar/Topbar';
+import { timeUnits, timeUnitsName,timeUnitWidth } from './myTimelineData';
+import TimeUnitsRow from './components/timeUnitsRow/timeUnitsRow';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Topbar/>
+      <div className="leftColumn"><div className="timeUnitsName">{timeUnitsName}</div>      </div>
+      <div className="timelinesArea">
+        <TimeUnitsRow timeUnits={timeUnits} width={timeUnitWidth} />     
+      </div>
     </div>
   );
 }

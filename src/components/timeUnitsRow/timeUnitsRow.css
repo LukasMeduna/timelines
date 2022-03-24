@@ -1,0 +1,12 @@
+.timeUnit {
+    border-right: solid black 1px;
+    border-bottom: solid black 1px;
+    height:40px;
+    line-height: 40px;
+    display: inline-block;
+    margin:0px;
+    margin-right:-1px;
+    padding:0px;
+    text-align:center;
+  }
+  
