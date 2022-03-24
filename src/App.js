@@ -1,7 +1,8 @@
 import './App.css';
 import Topbar from './components/topbar/Topbar';
-import { timeUnits, timeUnitsName,timeUnitWidth } from './myTimelineData';
+import { myTimeline, timeUnits, timeUnitsName,timeUnitWidth } from './myTimelineData';
 import TimeUnitsRow from './components/timeUnitsRow/timeUnitsRow';
+import Timeline from './components/timeline/Timeline';
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Topbar/>
       <div className="leftColumn"><div className="timeUnitsName">{timeUnitsName}</div>      </div>
       <div className="timelinesArea">
-        <TimeUnitsRow timeUnits={timeUnits} width={timeUnitWidth} />     
+        <TimeUnitsRow timeUnits={timeUnits} timeUnitWidth={timeUnitWidth} />
+        <Timeline timeUnits={timeUnits}  timeUnitWidth={timeUnitWidth} timeline={myTimeline} />
       </div>
     </div>
   );

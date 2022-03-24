@@ -1,0 +1,15 @@
+.timeline {
+    position: relative;
+}
+
+.timelineBoxContainer {
+    position: absolute;
+}
+
+.timelineBox {
+    margin: 3px;
+    border: solid silver 1px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 32px;
+}
