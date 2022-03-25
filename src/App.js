@@ -8,7 +8,6 @@ import TimelineName from './components/timelineName/TimelineName';
 
 function App() {
   const [unitWidth, setUnitWidth] = useState(timeUnitWidth);
-
   const zoomIn = () => setUnitWidth(unitWidth+10);
   const zoomOut = () => setUnitWidth(unitWidth-10);
 
