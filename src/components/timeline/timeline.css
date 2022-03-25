@@ -1,5 +1,7 @@
 .timeline {
     position: relative;
+    width: 100vw;
+    border-bottom: 1px solid silver;
 }
 
 .timelineBoxContainer {
