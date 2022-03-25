@@ -6,6 +6,7 @@
 
 .timelineBoxContainer {
     position: absolute;
+    overflow:hidden;
 }
 
 .timelineBox {
@@ -14,5 +15,13 @@
     border-radius: 5px;
     text-align: center;
     line-height: 32px;
-    overflow:hidden;
+
+}
+
+.timelineBoxContainer:hover {
+    overflow:visible;
+}
+
+.timelineBoxContainer:hover .timelineBox {
+    min-width: fit-content;
 }
