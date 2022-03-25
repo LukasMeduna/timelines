@@ -1,17 +1,24 @@
 import './App.css';
+import { useState } from 'react';
 import Topbar from './components/topbar/Topbar';
-import { myTimeline, timeUnits, timeUnitsName,timeUnitWidth } from './myTimelineData';
+import { myTimelines, timeUnits, timeUnitsName,timeUnitWidth } from './myTimelineData';
 import TimeUnitsRow from './components/timeUnitsRow/timeUnitsRow';
 import Timeline from './components/timeline/Timeline';
 
 function App() {
+  const [unitWidth, setUnitWidth] = useState(timeUnitWidth);
+
+  const zoomIn = () => setUnitWidth(unitWidth+10);
+  const zoomOut = () => setUnitWidth(unitWidth-10);
+
   return (
     <div className="App">
-      <Topbar/>
-      <div className="leftColumn"><div className="timeUnitsName">{timeUnitsName}</div>      </div>
+      <Topbar zoomIn={zoomIn} zoomOut={zoomOut} />
+      <div className="leftColumn"><div className="timeUnitsName">{timeUnitsName}</div></div>
       <div className="timelinesArea">
-        <TimeUnitsRow timeUnits={timeUnits} timeUnitWidth={timeUnitWidth} />
-        <Timeline timeUnits={timeUnits}  timeUnitWidth={timeUnitWidth} timeline={myTimeline} />
+        
+        <TimeUnitsRow timeUnits={timeUnits} timeUnitWidth={unitWidth} />
+        {myTimelines.map(myTimeline => <Timeline key={myTimeline.id} timeUnits={timeUnits}  timeUnitWidth={unitWidth} timeline={myTimeline} />)}
       </div>
     </div>
   );

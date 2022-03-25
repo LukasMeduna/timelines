@@ -1,14 +1,12 @@
 .App {
 margin-top: 50px;
 white-space: nowrap;
+display:flex;
 }
 
 .leftColumn {
-  position: absolute;
-  left:0;
   display:inline-block;
   width: 200px;
-  border-right: solid black 1px;
   height:calc(100vh - 50px);
 }
 
@@ -24,8 +22,9 @@ white-space: nowrap;
 .timelinesArea {
   position: absolute;
   left:200px;
-  width: calc(100vw - 200px);
-  height:calc(100vh - 50px);
+  width: calc(100vw - 220px);
+  min-height: calc(100vh - 50px);
   white-space: nowrap;
-  overflow: scroll;
+  overflow-x: scroll;
+  border-left: solid black 1px;
 }

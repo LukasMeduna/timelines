@@ -7,11 +7,23 @@
     z-index: 999;
     align-items: center;
     border-bottom: solid black 1px;
-
+    display:flex;
+    justify-content: space-between;
 }
 
 .topBar h1 {
     font-weight: 400;
     margin: 0 0 0 10px;
     padding: 5px;
+}
+
+.zoomButtons {
+    margin-right: 20px;
+}
+
+.zoomButtons button {
+    height: 30px;
+    width:30px;
+    border: solid gray 1px;
+    background-color: rgb(243, 243, 243);
 }
