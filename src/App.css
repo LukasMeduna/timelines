@@ -27,4 +27,5 @@ display:flex;
   white-space: nowrap;
   overflow-x: scroll;
   border-left: solid black 1px;
+  cursor: crosshair;
 }

@@ -6,6 +6,7 @@
 
 .timelineBoxContainer {
     position: absolute;
+    cursor: auto;
 }
 
 .timelineBox {
