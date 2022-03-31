@@ -9,6 +9,7 @@ import UploadFile from './components/uploadFile/UploadFile';
 function App() {
   const [data, setData] = useState();
   const uploadData = (uploadedData) => setData(uploadedData);
+  const downloadData = () => data;
 
   const zoomIn = () => { setData(previousState => { return { ...previousState, timeUnitWidth: data.timeUnitWidth + 10 } }); };
   const zoomOut = () => { setData(previousState => { return { ...previousState, timeUnitWidth: data.timeUnitWidth - 10 } }); };
@@ -16,7 +17,7 @@ function App() {
   if (data) {
     return (
       <div className="App">
-        <Topbar zoomIn={zoomIn} zoomOut={zoomOut} />
+        <Topbar downloadData={downloadData} zoomIn={zoomIn} zoomOut={zoomOut} />
         <div className="leftColumn">
           <div className="timeUnitsName">{data.timeUnitsName}</div>
           {data.myTimelines.map(myTimeline => <TimelineName key={myTimeline.id} timeline={myTimeline} />)}
