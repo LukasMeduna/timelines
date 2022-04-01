@@ -21,6 +21,7 @@ export default function Timeline(props) {
 
     const createTimelineBox = (e) => { 
         const boxText = prompt("Enter the text: ");
+        if (!boxText) return;
         const coordinateX = e.nativeEvent.offsetX;
         const coordinateY = e.nativeEvent.offsetY;
         /*if (e.type === "mousedown") {
