@@ -19,10 +19,37 @@ function TimelineBox(props) {
 export default function Timeline(props) {
     const totalTimeUnits = props.timeUnits.length;
 
-    const addTimelineBox = () => { alert('Ahoj')}
+    const createTimelineBox = (e) => { 
+        const boxText = prompt("Enter the text: ");
+        const coordinateX = e.nativeEvent.offsetX;
+        const coordinateY = e.nativeEvent.offsetY;
+        /*if (e.type === "mousedown") {
+            value = e.nativeEvent.offsetX;
+        } else {
+            value -= e.nativeEvent.offsetX;
+            console.log("value:",value);
+        }*/
+        const startingTimeUnit = Math.floor(coordinateX / props.timeUnitWidth);
+        const startingPosition = (coordinateX % props.timeUnitWidth) / props.timeUnitWidth;
+        const endingTimeUnit = startingTimeUnit + 1;
+        const endingPosition = startingPosition;
+        const row = Math.floor(coordinateY / 40);
+
+        const newTimelineBox = {
+            startingTimeUnit: startingTimeUnit,
+            startingPosition: startingPosition,
+            endingTimeUnit: endingTimeUnit,
+            endingPosition: endingPosition,
+            row: row,
+            text: boxText,
+            bgColor: "white"
+        }
+
+        props.addNewTimelineBox(newTimelineBox, props.id);
+    }
 
     return (
-        <div className="timeline" style={{height: props.timeline.rows*40+"px", width: totalTimeUnits*props.timeUnitWidth+"px"}} onClick={addTimelineBox}>
+        <div className="timeline" style={{height: props.timeline.rows*40+"px", width: totalTimeUnits*props.timeUnitWidth+"px"}} onClick={createTimelineBox}>
             {props.timeline.timelineBoxes.map(box => <TimelineBox box={box} key={box.id} timeUnitWidth={props.timeUnitWidth} timeUnits={props.timeUnits} />)}
         </div>
     )

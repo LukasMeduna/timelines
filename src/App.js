@@ -14,17 +14,28 @@ function App() {
   const zoomIn = () => { setData(previousState => { return { ...previousState, timeUnitWidth: data.timeUnitWidth + 10 } }); };
   const zoomOut = () => { setData(previousState => { return { ...previousState, timeUnitWidth: data.timeUnitWidth - 10 } }); };
 
+  const addNewTimelineBox = (newTimelineBox, timelineId) => {
+    const timelineNumber = data.timelines.findIndex(obj => {return obj.id === timelineId});
+    let timeline = data.timelines[timelineNumber];
+    const maxIdInTimelineBoxes = Math.max(...timeline.timelineBoxes.map(x => x.id));
+    newTimelineBox.id = maxIdInTimelineBoxes+1;
+    timeline.timelineBoxes.push(newTimelineBox);
+    const newTimelines = data.timelines;
+    newTimelines[timelineNumber] = timeline;
+    setData(previousState => { return { ...previousState, timelines: newTimelines } });
+  }
+
   if (data) {
     return (
       <div className="App">
         <Topbar downloadData={downloadData} zoomIn={zoomIn} zoomOut={zoomOut} />
         <div className="leftColumn">
           <div className="timeUnitsName">{data.timeUnitsName}</div>
-          {data.myTimelines.map(myTimeline => <TimelineName key={myTimeline.id} timeline={myTimeline} />)}
+          {data.timelines.map(myTimeline => <TimelineName key={myTimeline.id} timeline={myTimeline} />)}
         </div>
         <div className="timelinesArea">
           <TimeUnitsRow timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} />
-          {data.myTimelines.map(myTimeline => <Timeline key={myTimeline.id} timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} timeline={myTimeline} />)}
+          {data.timelines.map(myTimeline => <Timeline key={myTimeline.id} id={myTimeline.id} timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} timeline={myTimeline} addNewTimelineBox={addNewTimelineBox} />)}
         </div>
       </div>
     );

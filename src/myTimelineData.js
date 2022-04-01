@@ -1,8 +1,18 @@
 export const myTimelineData = {
     timeUnitsName: "Století",
-    timeUnits: ["11.", "12.", "13.", "14.", "15.", "16.", "17.", "18.", "19.", "20."],
+    timeUnits: [
+        { id: 0, name: "11." },
+        { id: 1, name: "12." },
+        { id: 2, name: "13." },
+        { id: 3, name: "14." },
+        { id: 4, name: "15." },
+        { id: 5, name: "16." },
+        { id: 6, name: "17." },
+        { id: 7, name: "18." },
+        { id: 8, name: "19." },
+        { id: 9, name: "20." }],
     timeUnitWidth: 200,
-    myTimelines: [
+    timelines: [
         {
             id: 0,
             name: "roky",

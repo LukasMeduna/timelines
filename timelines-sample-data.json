@@ -13,7 +13,7 @@
         {"id":9, "name": "20."}
     ],
     "timeUnitWidth": 200,
-    "myTimelines": [
+    "timelines": [
         {
             "id": 0,
             "name": "roky",
