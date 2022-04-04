@@ -19,9 +19,9 @@
 
 }
 
-.timelineBoxContainer:hover .timelineBox {
+/*.timelineBoxContainer:hover .timelineBox {
     min-width: fit-content;
-}
+}*/
 
 .resizerLeft {
     height: 100%;

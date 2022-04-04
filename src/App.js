@@ -25,6 +25,16 @@ function App() {
     setData(previousState => { return { ...previousState, timelines: newTimelines } });
   }
 
+  const updateTimelineBox = (timelineId, updatedTimelineBox) => {
+    const timelineNumber = data.timelines.findIndex(obj => {return obj.id === timelineId});
+    let timeline = data.timelines[timelineNumber];
+    const boxNumber = timeline.timelineBoxes.findIndex(obj => {return obj.id === updatedTimelineBox.id});
+    timeline.timelineBoxes[boxNumber] = updatedTimelineBox;
+    const newTimelines = data.timelines;
+    newTimelines[timelineNumber] = timeline;
+    setData(previousState => { return { ...previousState, timelines: newTimelines } });
+  }
+
   if (data) {
     return (
       <div className="App">
@@ -35,7 +45,16 @@ function App() {
         </div>
         <div className="timelinesArea">
           <TimeUnitsRow timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} />
-          {data.timelines.map(myTimeline => <Timeline key={myTimeline.id} id={myTimeline.id} timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} timeline={myTimeline} addNewTimelineBox={addNewTimelineBox} />)}
+          {data.timelines.map(myTimeline => 
+            <Timeline key={myTimeline.id} 
+                      id={myTimeline.id} 
+                      timeUnits={data.timeUnits} 
+                      timeUnitWidth={data.timeUnitWidth} 
+                      timeline={myTimeline} 
+                      addNewTimelineBox={addNewTimelineBox}
+                      updateTimelineBox={updateTimelineBox}
+            />
+          )}
         </div>
       </div>
     );
