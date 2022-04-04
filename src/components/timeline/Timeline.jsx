@@ -7,10 +7,39 @@ function TimelineBox(props) {
     const endPosition = endUnitNumber*props.timeUnitWidth+Math.round(props.box.endingPosition*props.timeUnitWidth);
     const boxWidth = endPosition-startPosition;
 
+    function initLeftResize() {
+        window.addEventListener('mousemove', leftResize);
+        window.addEventListener('mouseup', stopLeftResize);
+    }
+    function leftResize(e) {
+        document.getElementById(props.id).style.left = (e.pageX-200) + 'px';
+        document.getElementById(props.id).style.width = (boxWidth +startPosition - e.pageX+200) + 'px';
+    }
+    function stopLeftResize(e) {
+        window.removeEventListener('mousemove', leftResize);
+        window.removeEventListener('mouseup', stopLeftResize);
+        console.log(document.getElementById(props.id).style.left);
+    }
+
+    function initRightResize() {
+        window.addEventListener('mousemove', rightResize);
+        window.addEventListener('mouseup', stopRightResize);
+    }
+    function rightResize(e) {
+        document.getElementById(props.id).style.width = (e.pageX - 200 - startPosition + 2) + 'px';
+    }
+    function stopRightResize(e) {
+        window.removeEventListener('mousemove', rightResize);
+        window.removeEventListener('mouseup', stopRightResize);
+        console.log(document.getElementById(props.id).style.width);
+    }
+
 
     return (
-        <div className="timelineBoxContainer" style={{top: props.box.row*40+"px", left: startPosition+"px", width: boxWidth+"px"}}>
+        <div onMouseDown={(e) => {e.stopPropagation()}} className="timelineBoxContainer" id={props.id} style={{top: props.box.row*40+"px", left: startPosition+"px", width: boxWidth+"px"}}>
+            <div id="resizerLeft" onMouseDown={initLeftResize} className="resizerLeft"></div>
             <div className="timelineBox" style={{backgroundColor: props.box.bgColor}}>{props.box.text}</div>
+            <div id="resizeRight" onMouseDown={initRightResize} className="resizerRight"></div>
         </div>
     );
 }
@@ -49,8 +78,8 @@ export default function Timeline(props) {
     }
 
     return (
-        <div className="timeline" style={{height: props.timeline.rows*40+"px", width: totalTimeUnits*props.timeUnitWidth+"px"}} onClick={createTimelineBox}>
-            {props.timeline.timelineBoxes.map(box => <TimelineBox box={box} key={box.id} timeUnitWidth={props.timeUnitWidth} timeUnits={props.timeUnits} />)}
+        <div className="timeline" style={{height: props.timeline.rows*40+"px", width: totalTimeUnits*props.timeUnitWidth+"px"}} onMouseDown={createTimelineBox}>
+            {props.timeline.timelineBoxes.map(box => <TimelineBox box={box} key={box.id} id={props.id+"box"+box.id} timeUnitWidth={props.timeUnitWidth} timeUnits={props.timeUnits} />)}
         </div>
     )
 }
