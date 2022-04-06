@@ -6,6 +6,8 @@ import Timeline from './components/timeline/Timeline';
 import TimelineName from './components/timelineName/TimelineName';
 import UploadFile from './components/uploadFile/UploadFile';
 
+document.onselectstart = () => {return false}
+
 function App() {
   const [data, setData] = useState();
   const uploadData = (uploadedData) => setData(uploadedData);
