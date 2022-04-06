@@ -1,12 +1,11 @@
 import "./timeline.css";
-import { useState } from "react";
 
 function TimelineBox(props) {
-    const [startUnitNumber,setStartUnitNumber] = useState(props.timeUnits.map(x => x.id).indexOf(props.box.startingTimeUnit));
-    const [startPosition,setStartPosition] = useState(startUnitNumber*props.timeUnitWidth+Math.round(props.box.startingPosition*props.timeUnitWidth));
-    const [endUnitNumber,setEndUnitNumber] = useState(props.timeUnits.map(x => x.id).indexOf(props.box.endingTimeUnit));
-    const [endPosition,setEndPosition] = useState(endUnitNumber*props.timeUnitWidth+Math.round(props.box.endingPosition*props.timeUnitWidth));
-    const [boxWidth,setBoxWidth] = useState(endPosition-startPosition);
+    const startUnitNumber = props.timeUnits.map(x => x.id).indexOf(props.box.startingTimeUnit);
+    const startPosition = startUnitNumber*props.timeUnitWidth+Math.round(props.box.startingPosition*props.timeUnitWidth);
+    const endUnitNumber = props.timeUnits.map(x => x.id).indexOf(props.box.endingTimeUnit);
+    const endPosition = endUnitNumber*props.timeUnitWidth+Math.round(props.box.endingPosition*props.timeUnitWidth);
+    const boxWidth = endPosition-startPosition;
     const htmlId = props.timelineId+"box"+props.id;
 
     function initLeftResize() {
@@ -48,10 +47,7 @@ function TimelineBox(props) {
         const leftPosition = parseInt(document.getElementById(htmlId).style.left);
         const width = parseInt(document.getElementById(htmlId).style.width);
         const rightPosition = leftPosition + width;
-        setStartUnitNumber(Math.floor(startPosition / props.timeUnitWidth));
-        setEndUnitNumber(Math.floor(endPosition / props.timeUnitWidth));
-        setBoxWidth(width);setStartPosition(leftPosition);setEndPosition(rightPosition);
-
+        
         let newBox = props.box;
         newBox.startingTimeUnit = props.timeUnits[Math.floor(leftPosition / props.timeUnitWidth)].id;
         newBox.startingPosition = (leftPosition % props.timeUnitWidth) / props.timeUnitWidth;
