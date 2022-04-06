@@ -17,9 +17,10 @@ function TimelineBox(props) {
         const timelineHorizontalPosition = rect.left;
         const newStartPosition = e.pageX-timelineHorizontalPosition;
         const newBoxWidth = endPosition - e.pageX+timelineHorizontalPosition;
-        document.getElementById(htmlId).style.left = newStartPosition + 'px';
-        document.getElementById(htmlId).style.width = newBoxWidth + 'px';
-        
+        if (newBoxWidth>=0 && (e.pageX-rect.left)>0 ) {
+            document.getElementById(htmlId).style.left = newStartPosition + 'px';
+            document.getElementById(htmlId).style.width = newBoxWidth + 'px';
+        }
     }
     function stopLeftResize() {
         window.removeEventListener('mousemove', leftResize);
@@ -35,7 +36,10 @@ function TimelineBox(props) {
         const rect = document.querySelector(".timeUnitsRow").getBoundingClientRect();
         const timelineHorizontalPosition = rect.left;
         const newBoxWidth = e.pageX - timelineHorizontalPosition - startPosition + 2;
-        document.getElementById(htmlId).style.width = newBoxWidth + 'px';
+        if (newBoxWidth>=2 && (rect.right-e.pageX)>=200) {
+            document.getElementById(htmlId).style.width = newBoxWidth + 'px';
+            
+        }
     }
     function stopRightResize() {
         window.removeEventListener('mousemove', rightResize);
@@ -53,8 +57,6 @@ function TimelineBox(props) {
         newBox.startingPosition = (leftPosition % props.timeUnitWidth) / props.timeUnitWidth;
         newBox.endingTimeUnit = props.timeUnits[Math.floor(rightPosition / props.timeUnitWidth)].id;
         newBox.endingPosition = (rightPosition % props.timeUnitWidth) / props.timeUnitWidth;
-        console.log(newBox);
-
         props.updateTimelineBox(props.timelineId,newBox);
     }
 
@@ -84,8 +86,14 @@ export default function Timeline(props) {
         }*/
         const startingTimeUnit = props.timeUnits[Math.floor(coordinateX / props.timeUnitWidth)].id;
         const startingPosition = (coordinateX % props.timeUnitWidth) / props.timeUnitWidth;
-        const endingTimeUnit = props.timeUnits[Math.floor(coordinateX / props.timeUnitWidth) + 1].id;
-        const endingPosition = startingPosition;
+        let endingTimeUnit;
+        let endingPosition = startingPosition;
+        try {endingTimeUnit = props.timeUnits[Math.floor(coordinateX / props.timeUnitWidth) + 1].id;}
+        catch(err) {
+            endingTimeUnit = props.timeUnits[props.timeUnits.length-1].id;
+            endingPosition = 1;
+        }
+        
         const row = Math.floor(coordinateY / 40);
 
         const newTimelineBox = {
