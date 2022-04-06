@@ -85,9 +85,9 @@ export default function Timeline(props) {
             value -= e.nativeEvent.offsetX;
             console.log("value:",value);
         }*/
-        const startingTimeUnit = Math.floor(coordinateX / props.timeUnitWidth);
+        const startingTimeUnit = props.timeUnits[Math.floor(coordinateX / props.timeUnitWidth)].id;
         const startingPosition = (coordinateX % props.timeUnitWidth) / props.timeUnitWidth;
-        const endingTimeUnit = startingTimeUnit + 1;
+        const endingTimeUnit = props.timeUnits[Math.floor(coordinateX / props.timeUnitWidth) + 1].id;
         const endingPosition = startingPosition;
         const row = Math.floor(coordinateY / 40);
 
