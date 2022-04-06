@@ -33,12 +33,11 @@ function TimelineBox(props) {
         window.addEventListener('mouseup', stopRightResize);
     }
     function rightResize(e) {
-        const rect = document.querySelector(".timeUnitsRow").getBoundingClientRect();
+        const rect = document.querySelector(".timeline").getBoundingClientRect();
         const timelineHorizontalPosition = rect.left;
         const newBoxWidth = e.pageX - timelineHorizontalPosition - startPosition + 2;
-        if (newBoxWidth>=2 && (rect.right-e.pageX)>=200) {
+        if (newBoxWidth>=2 && (rect.right-e.screenX)>=0) {
             document.getElementById(htmlId).style.width = newBoxWidth + 'px';
-            
         }
     }
     function stopRightResize() {
@@ -55,8 +54,11 @@ function TimelineBox(props) {
         let newBox = props.box;
         newBox.startingTimeUnit = props.timeUnits[Math.floor(leftPosition / props.timeUnitWidth)].id;
         newBox.startingPosition = (leftPosition % props.timeUnitWidth) / props.timeUnitWidth;
-        newBox.endingTimeUnit = props.timeUnits[Math.floor(rightPosition / props.timeUnitWidth)].id;
         newBox.endingPosition = (rightPosition % props.timeUnitWidth) / props.timeUnitWidth;
+        try {newBox.endingTimeUnit = props.timeUnits[Math.floor(rightPosition / props.timeUnitWidth)].id;}
+        catch(err) {
+            newBox.endingTimeUnit = props.timeUnits[props.timeUnits.length-1].id;
+            newBox.endingPosition = 1}
         props.updateTimelineBox(props.timelineId,newBox);
     }
 
