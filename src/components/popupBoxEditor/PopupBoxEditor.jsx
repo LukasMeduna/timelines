@@ -8,6 +8,7 @@ export default function PopupBoxEditor(props) {
     function setNewText() {
         let newBox = props.box;
         newBox.text = boxText;
+        document.querySelector(".displayPopupBoxEditor").classList.remove("displayPopupBoxEditor");
         props.updateTimelineBox(props.timelineId, newBox);
     }
 
