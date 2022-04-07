@@ -6,7 +6,7 @@ export default function UploadFile(props) {
         readFile.readAsText(e.target.files[0],"UTF-8");
         readFile.onload = (e) => {
             const data = JSON.parse(e.target.result);
-            console.log("JSON data",data);
+            //console.log("JSON data",data);
             props.uploadData(data);
         };
     };
