@@ -1,6 +1,6 @@
 .timelineBoxContainer {
     position: absolute;
-    cursor: auto;
+    cursor: pointer;
 }
 
 .timelineBox {
