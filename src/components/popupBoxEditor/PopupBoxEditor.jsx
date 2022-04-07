@@ -19,7 +19,7 @@ export default function PopupBoxEditor(props) {
 
     return (
         <div className="popupBoxEditor">
-            <label for="boxText">Text: </label>
+            <label htmlFor="boxText">Text: </label>
             <input type="text" name="boxText" className="boxTextInput" value={boxText} onChange={e => setBoxText(e.target.value)} />
             <input type="button" className="boxTextButton" onClick={setNewText} value="OK" />
             <div className="deleteBox" onClick={deleteBox}>Delete this box</div>
