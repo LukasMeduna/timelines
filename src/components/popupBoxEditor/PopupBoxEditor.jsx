@@ -5,7 +5,8 @@ export default function PopupBoxEditor(props) {
     
     const [boxText, setBoxText] = useState(props.box.text);
 
-    function setNewText() {
+    function setNewText(e) {
+        e.preventDefault();
         let newBox = props.box;
         newBox.text = boxText;
         document.querySelector(".displayPopupBoxEditor").classList.remove("displayPopupBoxEditor");
@@ -20,9 +21,11 @@ export default function PopupBoxEditor(props) {
 
     return (
         <div className="popupBoxEditor">
+            <form onSubmit={setNewText}>
             <label htmlFor="boxText">Text: </label>
             <input type="text" name="boxText" className="boxTextInput" value={boxText} onChange={e => setBoxText(e.target.value)} />
-            <input type="button" className="boxTextButton" onClick={setNewText} value="OK" />
+            <input type="submit" className="boxTextButton"  value="OK" />
+            </form>
             <div className="deleteBox" onClick={deleteBox}>Delete this box</div>
         </div>
     )
