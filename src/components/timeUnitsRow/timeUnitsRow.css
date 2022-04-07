@@ -8,5 +8,11 @@
     margin-right:-1px;
     padding:0px;
     text-align:center;
+    position: relative;
+    cursor: auto;
+  }
+
+  .timeUnit span {
+    cursor: pointer;
   }
   

@@ -1,0 +1,41 @@
+.popupTimeUnitEditor {
+    border: solid black 1px;
+    border-radius: 10px;
+    position: absolute;
+    top: 105%;
+    left: 50%;
+    width: 200px;
+    margin: 0 0 0 -110px;
+    padding: 10px;
+    z-index: 10;
+    background-color: white;
+    display: none;
+}
+
+.displayPopupTimeUnitEditor+.popupTimeUnitEditor {
+    display: block;
+}
+
+.popupTimeUnitEditor::before { /* arrow on top */
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+
+.timeUnitTextInput {
+    width: 130px;
+    border: none;
+    border-bottom: solid black 1px;
+}
+
+.timeUnitTextButton {
+    padding: 3px 5px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 5px;
+}

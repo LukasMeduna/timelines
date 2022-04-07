@@ -47,6 +47,13 @@ function App() {
     setData(previousState => { return { ...previousState, timelines: newTimelines } });
   }
 
+  const updateTimeUnit = (timeUnit) => {
+    const timeUnitNumber = data.timeUnits.findIndex(obj => {return obj.id === timeUnit.id});
+    let newTimeUnits =  data.timeUnits;
+    newTimeUnits[timeUnitNumber] = timeUnit;
+    setData(previousState => { return { ...previousState, timeUnits: newTimeUnits } });
+  }
+
   if (data) {
     return (
       <div className="App">
@@ -56,7 +63,7 @@ function App() {
           {data.timelines.map(myTimeline => <TimelineName key={myTimeline.id} timeline={myTimeline} />)}
         </div>
         <div className="timelinesArea">
-          <TimeUnitsRow timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} />
+          <TimeUnitsRow timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} updateTimeUnit={updateTimeUnit} />
           {data.timelines.map(myTimeline => 
             <Timeline key={myTimeline.id} 
                       id={myTimeline.id} 
