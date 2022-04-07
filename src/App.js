@@ -32,7 +32,17 @@ function App() {
     let timeline = data.timelines[timelineNumber];
     const boxNumber = timeline.timelineBoxes.findIndex(obj => {return obj.id === updatedTimelineBox.id});
     timeline.timelineBoxes[boxNumber] = updatedTimelineBox;
-    const newTimelines = data.timelines;
+    let newTimelines = data.timelines;
+    newTimelines[timelineNumber] = timeline;
+    setData(previousState => { return { ...previousState, timelines: newTimelines } });
+  }
+
+  const deleteTimelineBox = (timelineId, boxId) => {
+    const timelineNumber = data.timelines.findIndex(obj => {return obj.id === timelineId});
+    let timeline = data.timelines[timelineNumber];
+    const boxNumber = timeline.timelineBoxes.findIndex(obj => {return obj.id === boxId});
+    timeline.timelineBoxes.splice(boxNumber,1);
+    let newTimelines = data.timelines;
     newTimelines[timelineNumber] = timeline;
     setData(previousState => { return { ...previousState, timelines: newTimelines } });
   }
@@ -55,6 +65,7 @@ function App() {
                       timeline={myTimeline} 
                       addNewTimelineBox={addNewTimelineBox}
                       updateTimelineBox={updateTimelineBox}
+                      deleteTimelineBox={deleteTimelineBox}
             />
           )}
         </div>

@@ -1,4 +1,5 @@
 import "./timelineBox.css";
+import PopupBoxEditor from "../popupBoxEditor/PopupBoxEditor";
 
 export function TimelineBox(props) {
     const startUnitNumber = props.timeUnits.map(x => x.id).indexOf(props.box.startingTimeUnit);
@@ -63,10 +64,25 @@ export function TimelineBox(props) {
         props.updateTimelineBox(props.timelineId, newBox);
     }
 
+    function toggleDisplayPopupBoxEditor(e) {
+        e.target.classList.toggle("displayPopupBoxEditor");
+        const elements = Array.from(document.getElementsByClassName("displayPopupBoxEditor"));
+        if (elements.length > 1) {
+          elements.forEach(el => {el.classList.remove("displayPopupBoxEditor")});
+          e.target.classList.add("displayPopupBoxEditor");
+        }
+    }
+
     return (
         <div onMouseDown={(e) => { e.stopPropagation(); }} className="timelineBoxContainer" id={props.timelineId + "box" + props.id} style={{ top: props.box.row * 40 + "px", left: startPosition + "px", width: boxWidth + "px" }}>
             <div onMouseDown={initLeftResize} className="resizerLeft"></div>
-            <div className="timelineBox" style={{ backgroundColor: props.box.bgColor }} title={props.box.text}>{props.box.text}</div>
+            <div className="timelineBox" style={{ backgroundColor: props.box.bgColor }} onClick={toggleDisplayPopupBoxEditor} title={props.box.text}>{props.box.text}</div>
+            <PopupBoxEditor 
+                updateTimelineBox={props.updateTimelineBox}
+                deleteTimelineBox={props.deleteTimelineBox}
+                box={props.box} 
+                timelineId={props.timelineId} 
+            />
             <div onMouseDown={initRightResize} className="resizerRight"></div>
         </div>
     );

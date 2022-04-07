@@ -44,6 +44,7 @@ export default function Timeline(props) {
                              timeUnitWidth={props.timeUnitWidth} 
                              timeUnits={props.timeUnits} 
                              updateTimelineBox={props.updateTimelineBox}
+                             deleteTimelineBox={props.deleteTimelineBox}
                 />)}
         </div>
     )
