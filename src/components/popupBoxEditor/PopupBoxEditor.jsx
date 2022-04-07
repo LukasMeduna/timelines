@@ -13,7 +13,7 @@ export default function PopupBoxEditor(props) {
     }
 
     function deleteBox() {
-        if (window.confirm("Are you sure?") == true) {
+        if (window.confirm("Are you sure?") === true) {
             props.deleteTimelineBox(props.timelineId, props.box.id);
         }
     }
