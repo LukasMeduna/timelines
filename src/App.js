@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import Topbar from './components/topbar/Topbar';
-import TimeUnitsRow from './components/timeUnitsRow/timeUnitsRow';
+import TimeUnitsRow from './components/timeUnitsRow/TimeUnitsRow';
 import Timeline from './components/timeline/Timeline';
 import TimelineName from './components/timelineName/TimelineName';
 import UploadFile from './components/uploadFile/UploadFile';
