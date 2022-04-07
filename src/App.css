@@ -18,6 +18,9 @@ display:flex;
   border-bottom: solid black 1px;
   font-size: 20px;
 }
+.timeUnitsName span {
+  cursor: pointer;
+}
 
 .timelinesArea {
   position: absolute;
@@ -28,4 +31,13 @@ display:flex;
   overflow-x: scroll;
   border-left: solid black 1px;
   cursor: crosshair;
+}
+
+button.addTimeUnit {
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 3px 7px;
+  border: none;
+  border-radius: 10px;
 }

@@ -22,7 +22,7 @@ function App() {
     const maxIdInTimelineBoxes = Math.max(...timeline.timelineBoxes.map(x => x.id));
     newTimelineBox.id = maxIdInTimelineBoxes+1;
     timeline.timelineBoxes.push(newTimelineBox);
-    const newTimelines = data.timelines;
+    let newTimelines = data.timelines;
     newTimelines[timelineNumber] = timeline;
     setData(previousState => { return { ...previousState, timelines: newTimelines } });
   }
@@ -47,6 +47,19 @@ function App() {
     setData(previousState => { return { ...previousState, timelines: newTimelines } });
   }
 
+  const addTimeUnit = () => {
+    const timeUnitName = prompt("New time Unit name: ");
+    if (!timeUnitName) return;
+    const maxIdInTimeUnites = Math.max(...data.timeUnits.map(x => x.id));
+    let newTimeUnits =  data.timeUnits;
+    const newTimeUnit = {
+      id:maxIdInTimeUnites+1, 
+      name: timeUnitName
+    }
+    newTimeUnits.push(newTimeUnit);
+    setData(previousState => { return { ...previousState, timeUnits: newTimeUnits } });
+  }
+
   const updateTimeUnit = (timeUnit) => {
     const timeUnitNumber = data.timeUnits.findIndex(obj => {return obj.id === timeUnit.id});
     let newTimeUnits =  data.timeUnits;
@@ -54,12 +67,21 @@ function App() {
     setData(previousState => { return { ...previousState, timeUnits: newTimeUnits } });
   }
 
+  const editTimeUnitsName = () => {
+    const newName = prompt("Time units name: ");
+    if (!newName) return;
+    setData(previousState => { return { ...previousState, timeUnitsName: newName } });
+  }
+
   if (data) {
     return (
       <div className="App">
         <Topbar downloadData={downloadData} zoomIn={zoomIn} zoomOut={zoomOut} />
         <div className="leftColumn">
-          <div className="timeUnitsName">{data.timeUnitsName}</div>
+          <div className="timeUnitsName">
+            <span onClick={editTimeUnitsName}>{data.timeUnitsName}</span>
+            <button className="addTimeUnit" onClick={addTimeUnit}>+</button>
+          </div>
           {data.timelines.map(myTimeline => <TimelineName key={myTimeline.id} timeline={myTimeline} />)}
         </div>
         <div className="timelinesArea">
