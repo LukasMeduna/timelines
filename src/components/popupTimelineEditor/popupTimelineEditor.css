@@ -1,0 +1,58 @@
+.popupTimelineEditor {
+    border: solid black 1px;
+    border-radius: 10px;
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    width: 176px;
+    margin: 0 0 0 -99px;
+    padding: 10px;
+    z-index: 10;
+    background-color: white;
+    display: none;
+}
+
+.displayPopupTimelineEditor+.popupTimelineEditor {
+    display: block;
+}
+
+.popupTimelineEditor::before { /* arrow on top */
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+  }
+
+.timelineNameInput {
+    width: 100px;
+    border: none;
+    border-bottom: solid black 1px;
+}
+
+.timelineNameButton {
+    padding: 3px 5px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.deleteTimeline {
+    font-size: small;
+    color: rgb(196, 81, 81);
+    text-align: right;
+    padding-top: 15px;
+    cursor: pointer;
+}
+
+.addRow {
+    font-size: small;
+    color: rgb(98, 81, 196);
+    text-align: right;
+    padding-top: 15px;
+    cursor: pointer;
+}

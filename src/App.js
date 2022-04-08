@@ -89,6 +89,20 @@ function App() {
     setData(previousState => { return { ...previousState, timelines: newTimelines } });
   }
 
+  const updateTimeline = (newTimeline) => {
+    const timelineNumber = data.timelines.findIndex(obj => {return obj.id === newTimeline.id});
+    let newTimelines = data.timelines;
+    newTimelines[timelineNumber] = newTimeline;
+    setData(previousState => { return { ...previousState, timelines: newTimelines } });
+  }
+
+  const deleteTimeline = (timelineId) => {
+    const timelineNumber = data.timelines.findIndex(obj => {return obj.id === timelineId});
+    let newTimelines = data.timelines;
+    newTimelines.splice(timelineNumber,1);
+    setData(previousState => { return { ...previousState, timelines: newTimelines } });
+  }
+
   if (data) {
     return (
       <div className="App">
@@ -101,7 +115,9 @@ function App() {
           {data.timelines.map(myTimeline => 
             <TimelineName key={myTimeline.id} 
                           timeline={myTimeline} 
-                          addNewTimeline={addNewTimeline} />)}
+                          addNewTimeline={addNewTimeline}
+                          updateTimeline={updateTimeline}
+                          deleteTimeline={deleteTimeline} />)}
         </div>
         <div className="timelinesArea">
           <TimeUnitsRow timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} updateTimeUnit={updateTimeUnit} />
