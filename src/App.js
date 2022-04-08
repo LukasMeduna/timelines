@@ -19,12 +19,13 @@ function App() {
   const addNewTimelineBox = (newTimelineBox, timelineId) => {
     const timelineNumber = data.timelines.findIndex(obj => {return obj.id === timelineId});
     let timeline = data.timelines[timelineNumber];
-    const maxIdInTimelineBoxes = Math.max(...timeline.timelineBoxes.map(x => x.id));
+    const maxIdInTimelineBoxes = Math.max(...timeline.timelineBoxes.map(x => x.id),0);
     newTimelineBox.id = maxIdInTimelineBoxes+1;
     timeline.timelineBoxes.push(newTimelineBox);
     let newTimelines = data.timelines;
     newTimelines[timelineNumber] = timeline;
     setData(previousState => { return { ...previousState, timelines: newTimelines } });
+    console.log(maxIdInTimelineBoxes);
   }
 
   const updateTimelineBox = (timelineId, updatedTimelineBox) => {
@@ -73,6 +74,21 @@ function App() {
     setData(previousState => { return { ...previousState, timeUnitsName: newName } });
   }
 
+  const addNewTimeline = (timelineName,idOfPreviousTimeline) => {
+    let newTimelines = data.timelines;
+    const maxIdInTimeUnites = Math.max(...data.timelines.map(x => x.id));
+    const newTimeline = {
+      id: maxIdInTimeUnites+1,
+      name: timelineName,
+      rows: 1,
+      timelineBoxes: []
+    }
+    const timelineNumber = 1 + data.timelines.findIndex(obj => {return obj.id === idOfPreviousTimeline});
+
+    newTimelines.splice(timelineNumber,0,newTimeline);//   .push(newTimeline);
+    setData(previousState => { return { ...previousState, timelines: newTimelines } });
+  }
+
   if (data) {
     return (
       <div className="App">
@@ -82,7 +98,10 @@ function App() {
             <span onClick={editTimeUnitsName}>{data.timeUnitsName}</span>
             <button className="addTimeUnit" onClick={addTimeUnit}>+</button>
           </div>
-          {data.timelines.map(myTimeline => <TimelineName key={myTimeline.id} timeline={myTimeline} />)}
+          {data.timelines.map(myTimeline => 
+            <TimelineName key={myTimeline.id} 
+                          timeline={myTimeline} 
+                          addNewTimeline={addNewTimeline} />)}
         </div>
         <div className="timelinesArea">
           <TimeUnitsRow timeUnits={data.timeUnits} timeUnitWidth={data.timeUnitWidth} updateTimeUnit={updateTimeUnit} />
