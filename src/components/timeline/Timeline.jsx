@@ -5,6 +5,7 @@ export default function Timeline(props) {
     const totalTimeUnits = props.timeUnits.length;
 
     const createTimelineBox = (e) => { 
+        if(e.button !==0) return;
         const boxText = prompt("Enter the text: ");
         if (!boxText) return;
         const coordinateX = e.nativeEvent.offsetX;
