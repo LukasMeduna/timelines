@@ -1,5 +1,6 @@
 import "./timelineBox.css";
 import PopupBoxEditor from "../popupBoxEditor/PopupBoxEditor";
+import { useEffect } from "react";
 
 export function TimelineBox(props) {
     const startUnitNumber = props.timeUnits.map(x => x.id).indexOf(props.box.startingTimeUnit);
@@ -7,7 +8,25 @@ export function TimelineBox(props) {
     const endUnitNumber = props.timeUnits.map(x => x.id).indexOf(props.box.endingTimeUnit);
     const endPosition = endUnitNumber * props.timeUnitWidth + Math.round(props.box.endingPosition * props.timeUnitWidth);
     const boxWidth = endPosition - startPosition;
-    const htmlId = props.timelineId + "box" + props.id;
+    const htmlboxId = props.timelineId + "box" + props.id;
+    const htmlboxContId = props.timelineId + "boxCont" + props.id;
+    
+    function checkOverflow(el) {
+        if(el.clientWidth < el.scrollWidth) {
+            el.style.visibility = "hidden";
+            el.nextElementSibling.style.display = "inline-block";
+            el.parentElement.classList.add("hasResizers");
+        } else {
+            el.style.visibility = "visible";
+            el.nextElementSibling.style.display = "none";
+            el.parentElement.classList.remove("hasResizers");
+        }
+    }
+
+    useEffect( ()=> {
+        checkOverflow(document.getElementById(htmlboxId));
+    })
+    
 
     function initLeftResize() {
         window.addEventListener('mousemove', leftResize);
@@ -19,8 +38,8 @@ export function TimelineBox(props) {
         const newStartPosition = e.pageX - timelineHorizontalPosition;
         const newBoxWidth = endPosition - e.pageX + timelineHorizontalPosition;
         if (newBoxWidth >= 0 && (e.pageX - rect.left) > 0) {
-            document.getElementById(htmlId).style.left = newStartPosition + 'px';
-            document.getElementById(htmlId).style.width = newBoxWidth + 'px';
+            document.getElementById(htmlboxContId).style.left = newStartPosition + 'px';
+            document.getElementById(htmlboxContId).style.width = newBoxWidth + 'px';
         }
     }
     function stopLeftResize() {
@@ -38,7 +57,7 @@ export function TimelineBox(props) {
         const timelineHorizontalPosition = rect.left;
         const newBoxWidth = e.pageX - timelineHorizontalPosition - startPosition + 2;
         if (newBoxWidth >= 2 && (rect.right - e.screenX) >= 0) {
-            document.getElementById(htmlId).style.width = newBoxWidth + 'px';
+            document.getElementById(htmlboxContId).style.width = newBoxWidth + 'px';
         }
     }
     function stopRightResize() {
@@ -48,8 +67,8 @@ export function TimelineBox(props) {
     }
 
     function updateBox() {
-        const leftPosition = parseInt(document.getElementById(htmlId).style.left);
-        const width = parseInt(document.getElementById(htmlId).style.width);
+        const leftPosition = parseInt(document.getElementById(htmlboxContId).style.left);
+        const width = parseInt(document.getElementById(htmlboxContId).style.width);
         const rightPosition = leftPosition + width;
 
         let newBox = props.box;
@@ -74,9 +93,10 @@ export function TimelineBox(props) {
     }
 
     return (
-        <div onMouseDown={(e) => { e.stopPropagation(); }} className="timelineBoxContainer" id={props.timelineId + "box" + props.id} style={{ top: props.box.row * 40 + "px", left: startPosition + "px", width: boxWidth + "px" }}>
+        <div onMouseDown={(e) => { e.stopPropagation(); }} className="timelineBoxContainer" id={htmlboxContId} style={{ top: props.box.row * 40 + "px", left: startPosition + "px", width: boxWidth + "px" }}>
             <div onMouseDown={initLeftResize} className="resizerLeft"></div>
-            <div className="timelineBox" style={{ backgroundColor: props.box.bgColor }} onClick={toggleDisplayPopupBoxEditor} title={props.box.text}>{props.box.text}</div>
+            <div className="timelineBox" id={htmlboxId} style={{ backgroundColor: props.box.bgColor }} onClick={toggleDisplayPopupBoxEditor} title={props.box.text}>{props.box.text}</div>
+            <div className="timelineBox overflowingBox" id={htmlboxId+"overflow"} style={{ display: "none", backgroundColor: props.box.bgColor }} onClick={toggleDisplayPopupBoxEditor}>{props.box.text}</div>
             <PopupBoxEditor 
                 updateTimelineBox={props.updateTimelineBox}
                 deleteTimelineBox={props.deleteTimelineBox}

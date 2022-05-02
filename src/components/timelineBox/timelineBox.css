@@ -1,6 +1,7 @@
 .timelineBoxContainer {
     position: absolute;
     cursor: pointer;
+    height: 40px;
 }
 
 .timelineBox {
@@ -10,12 +11,20 @@
     text-align: center;
     line-height: 32px;
     overflow: hidden;
-
 }
 
-/*.timelineBoxContainer:hover .timelineBox {
-    min-width: fit-content;
-}*/
+.overflowingBox {
+    line-height: 22px;
+    margin: 0 0 0 50%;
+    display: inline-block;
+    transform: translateX(-50%);
+    position: relative;
+    top: -27px;
+}
+
+.hasResizers {
+    background-color: black; /*TODO*/
+}
 
 .resizerLeft {
     height: 100%;
