@@ -15,11 +15,11 @@ export function TimelineBox(props) {
         if(el.clientWidth < el.scrollWidth) {
             el.style.visibility = "hidden";
             el.nextElementSibling.style.display = "inline-block";
-            el.parentElement.classList.add("hasResizers");
+            el.parentElement.classList.add("displayResizers");
         } else {
             el.style.visibility = "visible";
             el.nextElementSibling.style.display = "none";
-            el.parentElement.classList.remove("hasResizers");
+            el.parentElement.classList.remove("displayResizers");
         }
     }
 

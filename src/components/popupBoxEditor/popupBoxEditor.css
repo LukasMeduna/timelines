@@ -12,6 +12,10 @@
     display: none;
 }
 
+.displayResizers .popupBoxEditor {
+    top: 42px;
+}
+
 .displayPopupBoxEditor~.popupBoxEditor {
     display: block;
 }
