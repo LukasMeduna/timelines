@@ -12,7 +12,7 @@
     display: none;
 }
 
-.displayPopupBoxEditor+.popupBoxEditor {
+.displayPopupBoxEditor~.popupBoxEditor {
     display: block;
 }
 
