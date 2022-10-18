@@ -5,6 +5,7 @@ import TimeUnitsRow from './components/timeUnitsRow/TimeUnitsRow';
 import Timeline from './components/timeline/Timeline';
 import TimelineName from './components/timelineName/TimelineName';
 import UploadFile from './components/uploadFile/UploadFile';
+import { myTimelineData } from './myTimelineData';
 
 document.onselectstart = () => {return false}
 
@@ -140,8 +141,9 @@ function App() {
   else { //no data uploaded
     return (
       <div className="UploadDataContainer">
-        No data uploaded.
-        <UploadFile uploadData={uploadData} />
+        <p>No data uploaded.</p>
+        <p>Upload your data: <UploadFile uploadData={uploadData} /></p>
+        <p><button onClick={() => uploadData(myTimelineData)}>use sample data</button></p>
       </div>
     )
   }
