@@ -36,7 +36,7 @@ export default function Timeline(props) {
     }
 
     return (
-        <div className="timeline" style={{height: props.timeline.rows*40+"px", width: totalTimeUnits*props.timeUnitWidth+"px"}} onMouseDown={createTimelineBox}>
+        <div className="timeline" style={{height: props.timeline.rows*40+"px", width: totalTimeUnits*props.timeUnitWidth+"px"}} onClick={createTimelineBox}>
             {props.timeline.timelineBoxes.map(box => 
                 <TimelineBox box={box} 
                              key={box.id} 

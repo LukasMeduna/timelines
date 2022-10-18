@@ -93,7 +93,7 @@ export function TimelineBox(props) {
     }
 
     return (
-        <div onMouseDown={(e) => { e.stopPropagation(); }} className="timelineBoxContainer" id={htmlboxContId} style={{ top: props.box.row * 40 + "px", left: startPosition + "px", width: boxWidth + "px" }}>
+        <div onClick={(e) => { e.stopPropagation(); }} className="timelineBoxContainer" id={htmlboxContId} style={{ top: props.box.row * 40 + "px", left: startPosition + "px", width: boxWidth + "px" }}>
             <div onMouseDown={initLeftResize} className="resizerLeft"></div>
             <div className="timelineBox" id={htmlboxId} style={{ backgroundColor: props.box.bgColor }} onClick={toggleDisplayPopupBoxEditor} title={props.box.text}>{props.box.text}</div>
             <div className="timelineBox overflowingBox" id={htmlboxId+"overflow"} style={{ display: "none", backgroundColor: props.box.bgColor }} onClick={toggleDisplayPopupBoxEditor}>{props.box.text}</div>
