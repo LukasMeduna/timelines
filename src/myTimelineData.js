@@ -157,7 +157,7 @@ export const myTimelineData = {
                 },
                 {
                     id: 4,
-                    startingTimeUnit: "11.",
+                    startingTimeUnit: 0,
                     startingPosition: 0,
                     endingTimeUnit:2,
                     endingPosition: 1 / 3,
@@ -194,7 +194,7 @@ export const myTimelineData = {
                 },
                 {
                     id: 2,
-                    startingTimeUnit: "11.",
+                    startingTimeUnit: 0,
                     startingPosition: 95 / 100,
                     endingTimeUnit:2,
                     endingPosition: 70 / 100,
@@ -288,7 +288,7 @@ export const myTimelineData = {
             timelineBoxes: [
                 {
                     id: 0,
-                    startingTimeUnit: "11.",
+                    startingTimeUnit: 0,
                     startingPosition: 0,
                     endingTimeUnit:3,
                     endingPosition: 6/100,
